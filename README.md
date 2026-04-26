@@ -109,7 +109,6 @@ For this lab, PowerShell logging was enabled on `win10-lab` so suspicious comman
 
 On the Windows 10 endpoint `win10-lab`, Local Group Policy was opened:
 
-```text
 gpedit.msc
 
 ## Step 4: Configure Wazuh to Collect PowerShell Logs 📡
@@ -128,7 +127,7 @@ On the Windows 10 endpoint `win10-lab`, Notepad was opened as Administrator.
 
 The Wazuh agent configuration file was opened:
 
-```text
+
 C:\Program Files (x86)\ossec-agent\ossec.conf
 <img width="1002" height="716" alt="Screenshot 2026-04-26 151551" src="https://github.com/user-attachments/assets/50addf23-3db3-4a37-885e-671f7de762e8" />
 
