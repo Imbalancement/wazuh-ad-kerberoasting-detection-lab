@@ -131,3 +131,33 @@ The Wazuh agent configuration file was opened:
 C:\Program Files (x86)\ossec-agent\ossec.conf
 <img width="1002" height="716" alt="Screenshot 2026-04-26 151551" src="https://github.com/user-attachments/assets/50addf23-3db3-4a37-885e-671f7de762e8" />
 
+## Step 5: Enable Process Creation Logging 🧾
+
+### 🎯 Purpose
+
+PowerShell logging is useful, but it does not always show every external executable that runs on a Windows endpoint.
+
+To improve visibility, Windows process creation logging was enabled on `win10-lab`. This allowed the lab to capture Event ID `4688`, which records when a new process is created.
+
+This telemetry is useful for identifying tools and commands such as:
+
+powershell.exe
+cmd.exe
+setspn.exe
+klist.exe
+
+### 🛠️ Actions Performed
+
+On the Windows 10 endpoint win10-lab, Local Group Policy was opened:
+
+gpedit.msc
+
+Process creation auditing was enabled through the following path:
+
+Computer Configuration
+→ Windows Settings
+→ Security Settings
+→ Advanced Audit Policy Configuration
+→ Audit Policies
+→ Detailed Tracking
+→ Audit Process Creation
