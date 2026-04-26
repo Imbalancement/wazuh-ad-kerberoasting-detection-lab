@@ -161,3 +161,18 @@ Computer Configuration
 → Audit Policies
 → Detailed Tracking
 → Audit Process Creation
+
+### <img width="947" height="706" alt="Screenshot 2026-04-26 154600" src="https://github.com/user-attachments/assets/90447d0b-9de9-490a-a734-9b10b19c1f6a" />
+🔎 Evidence Collected
+
+After enabling process creation auditing, Windows generated Event ID 4688 logs on win10-lab.
+
+Wazuh successfully collected these process creation events.
+
+Key fields observed in Wazuh included:
+
+agent.name: win10-lab
+data.win.system.eventID: 4688
+data.win.eventdata.newProcessName
+data.win.eventdata.parentProcessName
+data.win.eventdata.commandLine
