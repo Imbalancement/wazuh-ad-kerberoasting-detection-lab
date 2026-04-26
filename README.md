@@ -51,5 +51,23 @@ The goal of this project was to build a realistic blue-team investigation lab wh
 
 A test service account named `svc_sql` was created in Active Directory and assigned the following Service Principal Name:
 
-```text
+## 🧪 Lab Walkthrough
+
+This section documents the full build and investigation process used to create the Kerberoasting detection lab.
+
+---
+
+## Step 1: Create a Roastable Service Account
+
+### Purpose
+
+Kerberoasting targets Active Directory service accounts that have a Service Principal Name, or SPN, assigned. To simulate this safely, a lab service account named `svc_sql` was created.
+
+### Actions Performed
+
+On the domain controller `dc01`, a service account was created:
+
+```powershell
+$password = ConvertTo-SecureString "Password123!" -AsPlainText -Force
+New-ADUser -Name "svc_sql" -SamAccountName "svc_sql" -AccountPassword $password -Enabled $true
 MSSQLSvc/dc01.lab.local:1433
