@@ -176,3 +176,53 @@ data.win.system.eventID: 4688
 data.win.eventdata.newProcessName
 data.win.eventdata.parentProcessName
 data.win.eventdata.commandLine
+
+## Step 6: Finalize the Investigation and Document Findings 🏁
+
+### 🎯 Purpose
+
+The final step of this lab was to summarize the investigation, connect the evidence across systems, and document what the activity would mean from a SOC analyst perspective.
+
+This step turns the lab from a technical exercise into a recruiter-ready security investigation.
+
+---
+
+### 🧠 Investigation Summary
+
+The lab successfully demonstrated Kerberoasting-style activity in an Active Directory environment.
+
+A service account named `svc_sql` was created with the following SPN:
+
+MSSQLSvc/dc01.lab.local:1433
+
+<img width="963" height="717" alt="svc_sql" src="https://github.com/user-attachments/assets/1bc79767-7760-42dc-8faa-5f0f0594258a" />
+
+
+### 🚨 Detection Logic
+
+This activity can be investigated by looking for:
+
+Windows Security Event ID 4769
+Service Name: svc_sql
+Client Address: 192.168.56.20
+Ticket Encryption Type: 0x17
+Failure Code: 0x0
+
+Additional supporting telemetry includes:
+
+PowerShell Event ID 4104
+Windows Process Creation Event ID 4688
+setspn.exe execution
+klist usage
+Kerberos service ticket cache activity
+
+### 🛡️ Defensive Takeaways
+
+This lab showed that defenders should monitor for:
+
+Service ticket requests for SPN-backed accounts
+RC4 Kerberos encryption type 0x17
+SPN enumeration activity
+setspn.exe execution from workstations
+Unusual Kerberos ticket requests from non-administrative endpoints
+PowerShell commands related to Kerberos, SPNs, or ticket activity
