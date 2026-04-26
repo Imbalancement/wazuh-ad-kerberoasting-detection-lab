@@ -67,7 +67,30 @@ Kerberoasting targets Active Directory service accounts that have a Service Prin
 
 On the domain controller `dc01`, a service account was created:
 
-```powershell
+powershell
 $password = ConvertTo-SecureString "Password123!" -AsPlainText -Force
 New-ADUser -Name "svc_sql" -SamAccountName "svc_sql" -AccountPassword $password -Enabled $true
 MSSQLSvc/dc01.lab.local:1433
+
+## Step 2: Enable Kerberos Service Ticket Auditing
+
+### Purpose
+
+Kerberoasting activity generates Kerberos service ticket requests. On a Windows domain controller, these requests are logged as Windows Security Event ID `4769`.
+
+### Actions Performed
+
+<img width="1007" height="838" alt="Step 2" src="https://github.com/user-attachments/assets/a2fda17f-52c6-4705-9b5f-0316b521713a" />
+
+
+On `dc01`, Kerberos service ticket auditing was enabled through Group Policy:
+
+text
+Computer Configuration
+→ Policies
+→ Windows Settings
+→ Security Settings
+→ Advanced Audit Policy Configuration
+→ Audit Policies
+→ Account Logon
+→ Audit Kerberos Service Ticket Operations
