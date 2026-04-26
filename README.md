@@ -111,3 +111,5 @@ On the Windows 10 endpoint `win10-lab`, Local Group Policy was opened:
 
 ```text
 gpedit.msc
+
+![PowerShell Script Block Logging Event ID 4104 on win10-lab](images/step-3-powershell-4104-event-viewer.png)
