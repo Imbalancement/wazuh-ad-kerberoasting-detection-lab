@@ -201,7 +201,7 @@ The output showed the lab service account svc_sql and its assigned SPN:
 CN=svc_sql,CN=Users,DC=lab,DC=local
     MSSQLSvc/dc01.lab.local:1433
 
-    <img width="1011" height="826" alt="step-6-spn-enumeration-svc-sql" src="https://github.com/user-attachments/assets/f554ded5-c176-40b1-9dd9-1ca3f7d3ba27" />
+ <img width="1011" height="826" alt="step-6-spn-enumeration-svc-sql" src="https://github.com/user-attachments/assets/f554ded5-c176-40b1-9dd9-1ca3f7d3ba27" />
 
 
 ## Step 9: Finalize the Investigation and Document Findings 🏁
