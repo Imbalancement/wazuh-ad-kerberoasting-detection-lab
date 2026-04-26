@@ -203,6 +203,66 @@ CN=svc_sql,CN=Users,DC=lab,DC=local
 
  <img width="1011" height="826" alt="step-6-spn-enumeration-svc-sql" src="https://github.com/user-attachments/assets/f554ded5-c176-40b1-9dd9-1ca3f7d3ba27" />
 
+## Step 7: Request a Kerberos Service Ticket 🎟️
+
+### 🎯 Purpose
+
+After identifying the `svc_sql` service account and its SPN, the next step was to request a Kerberos service ticket for that SPN.
+
+This simulates Kerberoasting-style activity because Kerberoasting relies on requesting service tickets for SPN-backed service accounts.
+
+---
+
+### 🛠️ Actions Performed
+
+On `win10-lab`, the Kerberos ticket cache was cleared:
+
+klist purge
+
+### 🔎 Evidence Collected
+
+The klist output confirmed that a Kerberos service ticket was requested and cached for:
+
+MSSQLSvc/dc01.lab.local:1433
+
+The ticket also showed that the KDC involved was:
+
+DC01.lab.local
+
+<img width="953" height="707" alt="klist" src="https://github.com/user-attachments/assets/3f5a279e-6135-4abb-a0a9-71b0cda6761e" />
+
+## Step 8: Validate Kerberos Event ID 4769 for the Service Account 🔐
+
+### 🎯 Purpose
+
+After requesting the Kerberos service ticket, the next step was to validate that the domain controller logged the activity as a **Kerberos service ticket request**.
+
+This is an important detection point because **Windows Security Event ID 4769** is commonly used to identify Kerberoasting-related activity. In this lab, I specifically looked for a ticket request tied to the `svc_sql` service account.
+
+---
+
+### 🛠️ Actions Performed
+
+On `dc01`, I reviewed Security Event ID `4769` events with PowerShell:
+
+Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4769} -MaxEvents 20 | Format-List TimeCreated, Id, Message
+
+### 🔎 Evidence Collected
+
+The event showed:
+
+Event ID: 4769
+Service Name: svc_sql
+Account Name: Administrator@LAB.LOCAL
+Client Address: ::ffff:192.168.56.20
+Ticket Encryption Type: 0x17
+
+The 0x17 encryption type is especially important because it indicates RC4-HMAC, which is commonly associated with Kerberoasting-style ticket requests.
+
+This confirmed that the Kerberos ticket request for the svc_sql SPN was successfully generated and logged on the domain controller.
+
+<img width="963" height="717" alt="svc_sql" src="https://github.com/user-attachments/assets/68bb15f3-a21c-4973-98ed-57191d9c8b35" />
+
 
 ## Step 9: Finalize the Investigation and Document Findings 🏁
 
