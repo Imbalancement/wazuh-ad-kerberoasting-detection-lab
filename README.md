@@ -313,3 +313,11 @@ SPN enumeration activity
 setspn.exe execution from workstations
 Unusual Kerberos ticket requests from non-administrative endpoints
 PowerShell commands related to Kerberos, SPNs, or ticket activity
+
+### ✅ Conclusion
+
+This lab successfully demonstrated a Kerberoasting-style detection workflow in an Active Directory environment using Wazuh and native Windows telemetry.
+
+The investigation confirmed that a service account with an SPN could be discovered, a Kerberos service ticket could be requested, and the resulting activity could be validated through Windows Security logs and Wazuh SIEM telemetry.
+
+This project demonstrates practical skills in Active Directory security, Kerberos analysis, Windows event investigation, Wazuh SIEM usage, and blue-team detection engineering.
