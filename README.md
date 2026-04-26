@@ -1,0 +1,55 @@
+# 🔥 Kerberoasting Detection Lab: Active Directory + Wazuh SIEM
+
+## 📌 Overview
+
+This lab demonstrates how Kerberoasting-style activity can be detected and investigated in an Active Directory environment using Wazuh SIEM, Windows Security logs, PowerShell logging, and process creation telemetry.
+
+The goal of this project was to build a realistic blue-team investigation lab where a domain workstation requests a Kerberos service ticket for a service account with an SPN, then analyze the resulting telemetry across the endpoint, domain controller, and SIEM.
+
+---
+
+## 🎯 Lab Objectives
+
+- Build a working Active Directory detection lab
+- Create a roastable service account with an SPN
+- Enable Kerberos service ticket auditing on the domain controller
+- Enable PowerShell Script Block Logging on the Windows endpoint
+- Enable Windows process creation logging
+- Generate Kerberoasting-style service ticket activity
+- Investigate Windows Event IDs `4769`, `4104`, and `4688`
+- Validate telemetry in Wazuh and on the source Windows systems
+
+---
+
+## 🧱 Lab Environment
+
+| System | Role | Description |
+|---|---|---|
+| Ubuntu Server | Wazuh Server | SIEM / log analysis platform |
+| Windows Server | `dc01` | Domain Controller for `LAB.LOCAL` |
+| Windows 10 | `win10-lab` | Domain-joined endpoint |
+| Kali Linux | Attacker VM | Reserved for future attack simulation |
+| Metasploitable | Vulnerable host | Reserved for future expansion |
+
+---
+
+## 🛠️ Tools and Technologies
+
+- Wazuh SIEM
+- Active Directory Domain Services
+- Windows Server
+- Windows 10
+- PowerShell
+- Windows Event Viewer
+- Group Policy
+- Kerberos authentication
+- VirtualBox
+
+---
+
+## 🔐 Attack Scenario
+
+A test service account named `svc_sql` was created in Active Directory and assigned the following Service Principal Name:
+
+```text
+MSSQLSvc/dc01.lab.local:1433
