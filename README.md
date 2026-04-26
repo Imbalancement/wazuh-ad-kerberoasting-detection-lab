@@ -112,4 +112,23 @@ On the Windows 10 endpoint `win10-lab`, Local Group Policy was opened:
 ```text
 gpedit.msc
 
-![PowerShell Script Block Logging Event ID 4104 on win10-lab](images/step-3-powershell-4104-event-viewer.png)
+## Step 4: Configure Wazuh to Collect PowerShell Logs 📡
+
+### 🎯 Purpose
+
+After enabling PowerShell Script Block Logging on `win10-lab`, the next step was to make sure Wazuh could collect those logs.
+
+This allowed PowerShell activity from the Windows 10 endpoint to be reviewed centrally in the Wazuh dashboard during the investigation.
+
+---
+
+### 🛠️ Actions Performed
+
+On the Windows 10 endpoint `win10-lab`, Notepad was opened as Administrator.
+
+The Wazuh agent configuration file was opened:
+
+```text
+C:\Program Files (x86)\ossec-agent\ossec.conf
+<img width="1002" height="716" alt="Screenshot 2026-04-26 151551" src="https://github.com/user-attachments/assets/50addf23-3db3-4a37-885e-671f7de762e8" />
+
