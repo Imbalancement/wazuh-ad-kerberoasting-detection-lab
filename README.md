@@ -94,3 +94,20 @@ Computer Configuration
 → Audit Policies
 → Account Logon
 → Audit Kerberos Service Ticket Operations
+
+## Step 3: Enable PowerShell Script Block Logging ⚡
+
+### 🎯 Purpose
+
+PowerShell logging provides visibility into command activity on the Windows endpoint. Script Block Logging is especially valuable because it records the actual PowerShell content being executed.
+
+For this lab, PowerShell logging was enabled on `win10-lab` so suspicious commands and Kerberos-related activity could be reviewed in Wazuh.
+
+---
+
+### 🛠️ Actions Performed
+
+On the Windows 10 endpoint `win10-lab`, Local Group Policy was opened:
+
+```text
+gpedit.msc
